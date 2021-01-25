@@ -1,0 +1,20 @@
+{
+    "produtos": [
+        {
+            "id": 1,
+            "nome": "Cloroquina",
+            "categoria": "Antiviral",
+            "preco": 40.0,
+            "estoque": 50,
+            "estoque_minimo": 5
+        },
+        {
+            "id": 2,
+            "nome": "Ivermectina",
+            "categoria": "Antiparasitário",
+            "preco": 27.5,
+            "estoque": 10,
+            "estoque_minimo": 15
+        }
+    ]
+}
