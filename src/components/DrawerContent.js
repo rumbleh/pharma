@@ -1,4 +1,4 @@
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 import {
   DrawerContentComponentProps,
   DrawerContentOptions,
@@ -35,6 +35,9 @@ export function DrawerContent(props: Props) {
     outputRange: [-100, -85, -70, -45, 0],
   });
 
+  const [showProdutos, setShowProdutos] = useState(true),
+  const [showProdutos, setShowProdutos] = useState(true),
+
   return (
     <DrawerContentScrollView {...props}>
       <Animated.View
@@ -55,55 +58,48 @@ export function DrawerContent(props: Props) {
             <Avatar.Image
               source={{
                 uri:
-                  'https://pbs.twimg.com/profile_images/952545910990495744/b59hSXUd_400x400.jpg',
+                  'https://media-exp1.licdn.com/dms/image/C5603AQGN4goisJ7a_w/profile-displayphoto-shrink_200_200/0/1607611048171?e=1617235200&v=beta&t=LV_IkcZAeo1bxa8xUdliwTuCi1BFjDffmC4F7F_7xzY',
               }}
               size={50}
             />
           </TouchableOpacity>
-          <Title style={styles.title}>Dawid Urbaniak</Title>
-          <Caption style={styles.caption}>@trensik</Caption>
+          <Title style={styles.title}>Pharma</Title>
+          <Caption style={styles.caption}>Thiago de Queiroz</Caption>
           <View style={styles.row}>
             <View style={styles.section}>
               <Paragraph style={[styles.paragraph, styles.caption]}>
                 202
               </Paragraph>
-              <Caption style={styles.caption}>Obserwuje</Caption>
+              <Caption style={styles.caption}>Produtos cadastrados</Caption>
             </View>
             <View style={styles.section}>
               <Paragraph style={[styles.paragraph, styles.caption]}>
                 159
               </Paragraph>
-              <Caption style={styles.caption}>Obserwujący</Caption>
+              <Caption style={styles.caption}>Abaixo do estoque</Caption>
             </View>
           </View>
         </View>
         <Drawer.Section style={styles.drawerSection}>
           <DrawerItem
             icon={({color, size}) => (
-              <Icon name="user" color={color} size={size} />
+              <Icon name="boxes" color={color} size={size} />
             )}
-            label="Profile"
+            label="Produtos"
             onPress={() => {}}
           />
           <DrawerItem
             icon={({color, size}) => (
-              <Icon name="play" color={color} size={size} />
+              <Icon name="box-open" color={color} size={size} />
             )}
-            label="Preferences"
-            onPress={() => {}}
-          />
-          <DrawerItem
-            icon={({color, size}) => (
-              <Icon name="star" color={color} size={size} />
-            )}
-            label="Bookmarks"
+            label="Estoque baixo"
             onPress={() => {}}
           />
         </Drawer.Section>
-        <Drawer.Section title="Preferences">
+        <Drawer.Section title="Configurações">
           <TouchableRipple onPress={toggleTheme}>
             <View style={styles.preference}>
-              <Text>Dark Theme</Text>
+              <Text>Mostrar quantidade de produtos</Text>
               <View pointerEvents="none">
                 <Switch value={theme === 'dark'} />
               </View>
@@ -111,7 +107,7 @@ export function DrawerContent(props: Props) {
           </TouchableRipple>
           <TouchableRipple onPress={toggleTheme}>
             <View style={styles.preference}>
-              <Text>RTL</Text>
+              <Text>Mostrar estoque abaixo</Text>
               <View pointerEvents="none">
                 <Switch value={rtl === 'right'} />
               </View>
@@ -140,8 +136,8 @@ const styles = StyleSheet.create({
   },
   row: {
     marginTop: 20,
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: 'column',
+    alignItems: 'flex-start',
   },
   section: {
     flexDirection: 'row',

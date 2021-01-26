@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const lista = require('../../produtos.json');
 
-const ProdutoReducer = (state = lista, action) => {
+const ConfiguracoesReducer = (state = lista, action) => {
   axios
     .get('http://10.0.2.2:3000/produtos')
     .then(({data}) => {
@@ -32,4 +32,4 @@ const ProdutoReducer = (state = lista, action) => {
   return state;
 };
 
-export default ProdutoReducer;
+export default ConfiguracoesReducer;

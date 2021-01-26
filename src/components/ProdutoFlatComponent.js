@@ -33,10 +33,15 @@ const ProdutoFlatComponet = ({data, index}) => {
         resizeMode="contain"
         style={styles.thumbnail}
       />
-
       <View style={styles.subcontainer}>
         <Text style={styles.title}>{data.nome}</Text>
         <Text>{data.categoria}</Text>
+        <TouchableOpacity
+          onPress={() => {
+            alert('ola');
+          }}>
+          <Icon name="heart" size={50} color="blue"></Icon>
+        </TouchableOpacity>
       </View>
     </TouchableOpacity>
   );
