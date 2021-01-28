@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, FlatList} from 'react-native';
-import ProdutoFlatComponent from './ProdutoFlatComponent';
+import ProdutoFlatComponent from '../components/ProdutoFlatComponent';
 import {useSelector} from 'react-redux';
 
 const ListaProdutos = () => {
@@ -10,6 +10,7 @@ const ListaProdutos = () => {
     <View>
       <FlatList
         data={lista}
+        keyExtractor={(item) => item.id.toString()}
         renderItem={({item, index}) => (
           <ProdutoFlatComponent data={item} index={index} />
         )}

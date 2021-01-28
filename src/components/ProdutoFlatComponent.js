@@ -6,23 +6,12 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import {useDispatch} from 'react-redux';
 
 const ProdutoFlatComponet = ({data, index}) => {
-  console.log('galo doido');
   const dispatch = useDispatch();
-
   const navigation = useNavigation();
   const navegar = () => {
-    navigation.navigate('FilmeDetalhe', {
+    navigation.navigate('VisualizarProduto', {
       name: data.Title,
       index,
-    });
-  };
-
-  const toggleFavorito = () => {
-    dispatch({
-      type: 'TOGGLE_FAVORITE',
-      payload: {
-        index,
-      },
     });
   };
 
@@ -36,12 +25,6 @@ const ProdutoFlatComponet = ({data, index}) => {
       <View style={styles.subcontainer}>
         <Text style={styles.title}>{data.nome}</Text>
         <Text>{data.categoria}</Text>
-        <TouchableOpacity
-          onPress={() => {
-            alert('ola');
-          }}>
-          <Icon name="heart" size={50} color="blue"></Icon>
-        </TouchableOpacity>
       </View>
     </TouchableOpacity>
   );

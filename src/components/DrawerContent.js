@@ -19,6 +19,8 @@ import {
   useTheme,
 } from 'react-native-paper';
 import Animated from 'react-native-reanimated';
+import {useSelector} from 'react-redux';
+import {useState} from 'react';
 
 type Props = DrawerContentComponentProps<DrawerNavigationProp>;
 
@@ -34,9 +36,22 @@ export function DrawerContent(props: Props) {
     inputRange: [0, 0.5, 0.7, 0.8, 1],
     outputRange: [-100, -85, -70, -45, 0],
   });
+  const config = useSelector((state) => state);
+  const countLowStock = (config) => {
+    config.reduce((qtde, prd) => {
+      return qtde + (prd.estoque < prd.estoque_minimo ? 1 : 0);
+    });
+  };
 
-  const [showProdutos, setShowProdutos] = useState(true),
-  const [showProdutos, setShowProdutos] = useState(true),
+  const [contarProdutos, setContarProdutos] = useState(true);
+  const [contarEstoqueBaixo, setContarEstoqueBaixo] = useState(true);
+
+  const swtContarProdutos = () => {
+    setContarProdutos(!contarProdutos);
+  };
+  const swtEstoqueBaixo = () => {
+    setContarEstoqueBaixo(!contarEstoqueBaixo);
+  };
 
   return (
     <DrawerContentScrollView {...props}>
@@ -66,18 +81,26 @@ export function DrawerContent(props: Props) {
           <Title style={styles.title}>Pharma</Title>
           <Caption style={styles.caption}>Thiago de Queiroz</Caption>
           <View style={styles.row}>
-            <View style={styles.section}>
-              <Paragraph style={[styles.paragraph, styles.caption]}>
-                202
-              </Paragraph>
-              <Caption style={styles.caption}>Produtos cadastrados</Caption>
-            </View>
-            <View style={styles.section}>
-              <Paragraph style={[styles.paragraph, styles.caption]}>
-                159
-              </Paragraph>
-              <Caption style={styles.caption}>Abaixo do estoque</Caption>
-            </View>
+            {contarProdutos ? (
+              <View style={styles.section}>
+                <Paragraph style={[styles.paragraph, styles.caption]}>
+                  {config.produtos.length}
+                </Paragraph>
+                <Caption style={styles.caption}>Produtos cadastrados</Caption>
+              </View>
+            ) : null}
+            {contarEstoqueBaixo ? (
+              <View style={styles.section}>
+                <Paragraph style={[styles.paragraph, styles.caption]}>
+                  {
+                    config.produtos.filter((prd) => {
+                      return prd.estoque < prd.estoque_minimo;
+                    }).length
+                  }
+                </Paragraph>
+                <Caption style={styles.caption}>Abaixo do estoque</Caption>
+              </View>
+            ) : null}
           </View>
         </View>
         <Drawer.Section style={styles.drawerSection}>
@@ -97,19 +120,19 @@ export function DrawerContent(props: Props) {
           />
         </Drawer.Section>
         <Drawer.Section title="Configurações">
-          <TouchableRipple onPress={toggleTheme}>
+          <TouchableRipple onPress={swtContarProdutos}>
             <View style={styles.preference}>
               <Text>Mostrar quantidade de produtos</Text>
               <View pointerEvents="none">
-                <Switch value={theme === 'dark'} />
+                <Switch value={contarProdutos} />
               </View>
             </View>
           </TouchableRipple>
-          <TouchableRipple onPress={toggleTheme}>
+          <TouchableRipple onPress={swtEstoqueBaixo}>
             <View style={styles.preference}>
               <Text>Mostrar estoque abaixo</Text>
               <View pointerEvents="none">
-                <Switch value={rtl === 'right'} />
+                <Switch value={contarEstoqueBaixo} />
               </View>
             </View>
           </TouchableRipple>

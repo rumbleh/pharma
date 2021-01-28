@@ -3,7 +3,7 @@ import axios from 'axios';
 const lista = require('../../produtos.json');
 
 const ProdutoReducer = (state = lista, action) => {
-  axios
+  /*axios
     .get('http://10.0.2.2:3000/produtos')
     .then(({data}) => {
       console.log(data);
@@ -12,7 +12,7 @@ const ProdutoReducer = (state = lista, action) => {
     .then((res) => {
       console.log(res);
     });
-
+*/
   let data = [...state.produtos];
   let index;
 

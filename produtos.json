@@ -6,7 +6,7 @@
             "categoria": "Antiviral",
             "preco": 40.0,
             "estoque": 50,
-            "estoque_minimo": 5
+            "estoque_minimo": 155
         },
         {
             "id": 2,

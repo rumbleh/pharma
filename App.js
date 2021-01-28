@@ -6,7 +6,7 @@ import {createDrawerNavigator} from '@react-navigation/drawer';
 import {NavigationContainer} from '@react-navigation/native';
 import ProdutoReducer from './src/reducers/ProdutoReducer';
 import {DrawerContent} from './src/components/DrawerContent';
-import ListaProdutos from './src/components/ListaProdutos';
+import ProdutosStack from './src/screens/StackProdutos';
 import {createStore} from 'redux';
 
 const store = createStore(ProdutoReducer);
@@ -19,7 +19,7 @@ export default function Main() {
         <NavigationContainer>
           <Drawer.Navigator
             drawerContent={(props) => <DrawerContent {...props} />}>
-            <Drawer.Screen name="Home" component={ListaProdutos} />
+            <Drawer.Screen name="ProdutosStack" component={ProdutosStack} />
           </Drawer.Navigator>
         </NavigationContainer>
       </PaperProvider>
