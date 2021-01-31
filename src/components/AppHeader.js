@@ -1,7 +1,8 @@
+import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {TouchableOpacity} from 'react-native';
 import {Appbar, Avatar} from 'react-native-paper';
-import {Icon} from 'react-native-vector-icons/FontAwesome5';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const Header = ({scene, previous, navigation}) => {
   const {options} = scene.descriptor;
@@ -15,19 +16,17 @@ const Header = ({scene, previous, navigation}) => {
   return (
     <Appbar.Header>
       {previous ? (
-        <Appbar.BackAction onPress={navigation.pop} />
+        <Appbar.BackAction
+          onPress={() => {
+            navigation.navigate('ListaProdutos', {});
+          }}
+        />
       ) : (
         <TouchableOpacity
           onPress={() => {
             navigation.openDrawer();
           }}>
-          <Avatar.Image
-            size={40}
-            source={{
-              uri:
-                'https://media-exp1.licdn.com/dms/image/C5603AQGN4goisJ7a_w/profile-displayphoto-shrink_200_200/0/1607611048171?e=1617235200&v=beta&t=LV_IkcZAeo1bxa8xUdliwTuCi1BFjDffmC4F7F_7xzY',
-            }}
-          />
+          <Icon name="menu" size={30} color="white" />
         </TouchableOpacity>
       )}
       <Appbar.Content title={title} />

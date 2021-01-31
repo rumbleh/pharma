@@ -8,16 +8,15 @@ import VisualizarProduto from './VisualizarProduto';
 import Header from '../components/AppHeader';
 import {useNavigation} from '@react-navigation/native';
 
-const ProdutosStack = ({navigation}) => {
+const ProdutosStack = () => {
   const Stack = createStackNavigator();
 
   return (
     <Stack.Navigator
       initialRouteName="ListaProdutos"
+      headerMode="screen"
       screenOptions={{
-        header: ({scene, previous, navigation}) => (
-          <Header scene={scene} previous={previous} navigation={navigation} />
-        ),
+        header: (props) => <Header {...props} />,
       }}>
       <Stack.Screen
         name="ListaProdutos"
@@ -27,17 +26,17 @@ const ProdutosStack = ({navigation}) => {
       <Stack.Screen
         name="VisualizarProduto"
         component={VisualizarProduto}
-        options={{headerTitle: 'Produto '}}
+        options={{headerTitle: 'Visualizando produto'}}
       />
       <Stack.Screen
         name="IncluirProduto"
         component={IncluirProduto}
-        options={{headerTitle: 'Produto '}}
+        options={{headerTitle: 'Incluir produto'}}
       />
       <Stack.Screen
         name="EditarProduto"
         component={EditarProduto}
-        options={{headerTitle: 'Produto '}}
+        options={{headerTitle: 'Editar produto'}}
       />
     </Stack.Navigator>
   );

@@ -1,3 +1,4 @@
+import React from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import {
   DrawerContentComponentProps,
@@ -5,7 +6,7 @@ import {
   DrawerContentScrollView,
   DrawerItem,
 } from '@react-navigation/drawer';
-import React from 'react';
+
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {
   Avatar,
@@ -19,39 +20,18 @@ import {
   useTheme,
 } from 'react-native-paper';
 import Animated from 'react-native-reanimated';
-import {useSelector} from 'react-redux';
 import {useState} from 'react';
 
 type Props = DrawerContentComponentProps<DrawerNavigationProp>;
 
 export function DrawerContent(props: Props) {
   const paperTheme = useTheme();
-  const toggleTheme = () => {
-    return null;
-  };
-  const theme = 'g';
-  const rtl = false;
 
   const translateX = Animated.interpolate(props.progress, {
     inputRange: [0, 0.5, 0.7, 0.8, 1],
     outputRange: [-100, -85, -70, -45, 0],
   });
-  const config = useSelector((state) => state);
-  const countLowStock = (config) => {
-    config.reduce((qtde, prd) => {
-      return qtde + (prd.estoque < prd.estoque_minimo ? 1 : 0);
-    });
-  };
-
-  const [contarProdutos, setContarProdutos] = useState(true);
-  const [contarEstoqueBaixo, setContarEstoqueBaixo] = useState(true);
-
-  const swtContarProdutos = () => {
-    setContarProdutos(!contarProdutos);
-  };
-  const swtEstoqueBaixo = () => {
-    setContarEstoqueBaixo(!contarEstoqueBaixo);
-  };
+  const config = []; //useSelector((state) => state);
 
   return (
     <DrawerContentScrollView {...props}>
@@ -80,28 +60,6 @@ export function DrawerContent(props: Props) {
           </TouchableOpacity>
           <Title style={styles.title}>Pharma</Title>
           <Caption style={styles.caption}>Thiago de Queiroz</Caption>
-          <View style={styles.row}>
-            {contarProdutos ? (
-              <View style={styles.section}>
-                <Paragraph style={[styles.paragraph, styles.caption]}>
-                  {config.produtos.length}
-                </Paragraph>
-                <Caption style={styles.caption}>Produtos cadastrados</Caption>
-              </View>
-            ) : null}
-            {contarEstoqueBaixo ? (
-              <View style={styles.section}>
-                <Paragraph style={[styles.paragraph, styles.caption]}>
-                  {
-                    config.produtos.filter((prd) => {
-                      return prd.estoque < prd.estoque_minimo;
-                    }).length
-                  }
-                </Paragraph>
-                <Caption style={styles.caption}>Abaixo do estoque</Caption>
-              </View>
-            ) : null}
-          </View>
         </View>
         <Drawer.Section style={styles.drawerSection}>
           <DrawerItem
@@ -109,33 +67,19 @@ export function DrawerContent(props: Props) {
               <Icon name="boxes" color={color} size={size} />
             )}
             label="Produtos"
-            onPress={() => {}}
+            onPress={() => {
+              props.navigation.navigate('ListaProdutos', {});
+            }}
           />
           <DrawerItem
             icon={({color, size}) => (
-              <Icon name="box-open" color={color} size={size} />
+              <Icon name="plus" color={color} size={size} />
             )}
-            label="Estoque baixo"
-            onPress={() => {}}
+            label="Incluir produto"
+            onPress={() => {
+              props.navigation.navigate('IncluirProduto', {});
+            }}
           />
-        </Drawer.Section>
-        <Drawer.Section title="Configurações">
-          <TouchableRipple onPress={swtContarProdutos}>
-            <View style={styles.preference}>
-              <Text>Mostrar quantidade de produtos</Text>
-              <View pointerEvents="none">
-                <Switch value={contarProdutos} />
-              </View>
-            </View>
-          </TouchableRipple>
-          <TouchableRipple onPress={swtEstoqueBaixo}>
-            <View style={styles.preference}>
-              <Text>Mostrar estoque abaixo</Text>
-              <View pointerEvents="none">
-                <Switch value={contarEstoqueBaixo} />
-              </View>
-            </View>
-          </TouchableRipple>
         </Drawer.Section>
       </Animated.View>
     </DrawerContentScrollView>

@@ -1,20 +1,24 @@
 {
-    "produtos": [
-        {
-            "id": 1,
-            "nome": "Cloroquina",
-            "categoria": "Antiviral",
-            "preco": 40.0,
-            "estoque": 50,
-            "estoque_minimo": 155
-        },
-        {
-            "id": 2,
-            "nome": "Ivermectina",
-            "categoria": "Antiparasitário",
-            "preco": 27.5,
-            "estoque": 10,
-            "estoque_minimo": 15
-        }
-    ]
+  "produtos": [
+    {
+      "id": 1,
+      "codigo": "12345",
+      "nome": "Hidroxicloroquina",
+      "categoria": "Antiviral",
+      "preco": 4000,
+      "estoque": "5",
+      "estoque_minimo": "1550",
+      "foto": "https://img.r7.com/images/cloroquina-15062020180934904?dimensions=771x420&&amp;&amp;resize=771x420&amp;crop=1109x604+0+91"
+    },
+    {
+      "id": 3,
+      "foto": "content://com.pharma.imagepickerprovider/cacheDir/rn_image_picker_lib_temp_cd023b27-593c-498e-8eba-c222d0a948c6.jpg",
+      "nome": "Novalgina",
+      "categoria": "Analgésico",
+      "codigo": "4456",
+      "estoque": "1000",
+      "estoque_minimo": "10",
+      "preco": 4
+    }
+  ]
 }
